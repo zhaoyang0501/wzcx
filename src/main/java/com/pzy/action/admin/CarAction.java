@@ -17,7 +17,7 @@ import com.pzy.service.CarService;
 import com.pzy.service.CategoryService;
 
 @Namespace("/admin/car")
-@ParentPackage("json-default")
+@ParentPackage("json-default") 
 public class CarAction extends PageAction {
 	private String name;
 	private Long id;
