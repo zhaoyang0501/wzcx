@@ -53,7 +53,7 @@ public class CategoryAction extends PageAction {
 	@Action(value = "get", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
 	public String get() {
 		getResultMap().put("object", categoryService.findCategory(id));
-		getResultMap().put("state", "success");
+		getResultMap().put("state", "success"); 
 		getResultMap().put("msg", "删除成功");
 		return SUCCESS;
 	}
