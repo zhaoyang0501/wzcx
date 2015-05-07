@@ -116,7 +116,7 @@ jQuery.adminLoad = {
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/load/save",
 	    			data:{
-	    				"load.name":$("name").val(),
+	    				"load.name":$("#name").val(),
 	    				"load.oneway":$("#oneway").val(),
 	    				"load.way":$("#way").val(),
 	    				"load.maxspeed":$("#maxspeed").val(),
@@ -139,7 +139,7 @@ jQuery.adminLoad = {
 	    			url : $.ace.getContextPath() + "/admin/load/update",
 	    			data:{
 	    				"load.id":$("#id").val(),
-	    				"load.name":$("name").val(),
+	    				"load.name":$("#name").val(),
 	    				"load.oneway":$("#oneway").val(),
 	    				"load.way":$("#way").val(),
 	    				"load.maxspeed":$("#maxspeed").val(),

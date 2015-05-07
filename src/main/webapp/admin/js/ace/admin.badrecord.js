@@ -114,7 +114,7 @@ jQuery.adminBadRecord = {
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/badrecord/save",
 	    			data:{
-	    				"badRecord.no":$("no").val(),
+	    				"badRecord.no":$("#no").val(),
 	    				"badRecord.address":$("#address").val(),
 	    				"badRecord.type":$("#type").val(),
 	    				"badRecord.createDate":$("#createDate").val(),

@@ -111,6 +111,15 @@
 									</select>
 								</div>
 							</div>
+							<div class="control-group" id='control_projectStep'>
+								<label for="createDate" class="control-label">违章时间：</label>
+								<div class="controls">
+									<div class=" input-append date">
+										 <input id="createDate"  type="text" value="" readonly="readonly" >
+										 <span class="add-on"><i class="icon-th"></i></span>
+									</div>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>

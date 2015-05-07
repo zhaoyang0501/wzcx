@@ -88,13 +88,13 @@
 							<input type="hidden" id="categoryId" value="">
 							
 							<div class="control-group">
-								<label for="code" class="control-label">车辆代码：</label>
+								<label for="code" class="control-label">车型代码：</label>
 								<div class="controls">
 									<input type="text" id="code" placeholder="">
 								</div>
 							</div>
 							<div class="control-group">
-								<label for="name" class="control-label">车辆名称：</label>
+								<label for="name" class="control-label">车型名称：</label>
 								<div class="controls">
 									<input type="text" id="name" placeholder="">
 								</div>

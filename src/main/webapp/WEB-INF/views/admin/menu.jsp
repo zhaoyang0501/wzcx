@@ -25,9 +25,10 @@
 		<div class="left-secondary-nav tab-content" >
 			<div class="tab-pane active dailyreport" id="dailyreport">
 				<ul id="nav" class="accordion-nav" >
-					<li><a href="${pageContext.request.contextPath}/admin/user/index"><i class="icon-pencil"></i> 用户管理</a></li>
-					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-upload"></i> 分类管理 </a></li>
-					<li><a href="${pageContext.request.contextPath}/admin/cookbook/index"><i class="icon-zoom-in"></i> 菜谱管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-pencil"></i> 车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/car/index"><i class="icon-upload"></i> 车辆管理 </a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/load/index"><i class="icon-zoom-in"></i> 道路管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/badrecord/index"><i class="icon-zoom-in"></i> 违章管理</a></li>
 				</ul>
 			</div>
 		</div>
