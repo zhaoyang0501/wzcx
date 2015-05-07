@@ -122,7 +122,7 @@
 							<div class="control-group">
 								<label for="trademark" class="control-label">品牌：</label>
 								<div class="controls">
-									<select id='"trademark"' >
+									<select id='trademark' >
 										<option value=""></option>
 										<option value="奥迪">奥迪</option>
 										<option value="别克">别克</option>

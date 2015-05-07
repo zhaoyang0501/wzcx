@@ -144,6 +144,7 @@ jQuery.adminCar = {
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/car/update",
 	    			data:{
+	    				"car.id":$("#id").val(),
 	    				"car.no":$("#no").val(),
 	    				"car.category.id":$("#categoryid").val(),
 	    				"car.engineNo":$("#engineNo").val(),
@@ -177,9 +178,14 @@ jQuery.adminCar = {
     				if(json.resultMap.state=='success'){
     					$("#user_modal_header_label").text("修改分类");
     					$("#_modal").modal('show');
-    					$("#name").val(json.resultMap.object.name);
-    					$("#remark").val(json.resultMap.object.remark);
-    					$("#code").val(json.resultMap.object.code);
+    					$("#no").val(json.resultMap.object.no);
+    					$("#categoryid").val(json.resultMap.object.categoryid);
+    					$("#engineNo").val(json.resultMap.object.engineNo);
+    					$("#owner").val(json.resultMap.object.owner);
+    					$("#trademark").val(json.resultMap.object.trademark);
+    					$("#color").val(json.resultMap.object.color);
+    					$("#gearbox").val(json.resultMap.object.gearbox);
+    					
     				}else{
     					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
     				}
