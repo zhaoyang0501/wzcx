@@ -9,6 +9,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="css/bootstrap-panel.css" rel="stylesheet">
+		<link href="css/bootstrap-theme.css" rel="stylesheet">
 		<link href="css/site.css" rel="stylesheet">
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	</head>
@@ -46,79 +48,51 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="span12">
-					<h1>
-						公告查询
-					</h1>
-					<form class="form-inline">
-					<label class="control-label" for="inputEmail">发布日期</label>
-  <input type="text" class="input-small" placeholder="Email">~
-  <input type="password" class="input-small" placeholder="Password">
-  <button type="submit" class="btn">查询</button>
-</form>
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th>
-									标题
-								</th>
-								<th>
-									发布时间
-								</th>
-								<th>
-									查看
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>				
-					
+				<div class="span6">
+				<div class="panel panel-success ">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading ">新闻</div>
+				  <!-- List group -->
+				  <ul class="list-group">
+				    <li class="list-group-item">Cras justo odio</li>
+				    <li class="list-group-item">Dapibus ac facilisis in</li>
+				    <li class="list-group-item">Morbi leo risus</li>
+				    <li class="list-group-item">Porta ac consectetur ac</li>
+				    <li class="list-group-item">Vestibulum at eros</li>
+				  </ul>
 				</div>
+					
+			</div>
+			<div class="span6">
+				<div class="panel panel-primary ">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading ">公告</div>
+				  <!-- List group -->
+				  <ol>
+				    <li class="list-group-item">Cras justo odio</li>
+				    <li class="list-group-item">Dapibus ac facilisis in</li>
+				    <li class="list-group-item">Morbi leo risus</li>
+				    <li class="list-group-item">Porta ac consectetur ac</li>
+				    <li class="list-group-item">Vestibulum at eros</li>
+				  </ol>
+				</div>
+					
+			</div>
+			
+			<div class="span6">
+				<div class="panel panel-warning ">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading ">道路信息</div>
+				  <!-- List group -->
+				  <ul class="list-group">
+				    <li class="list-group-item">Cras justo odio <span class='pull-right'>2015-01-01</span> </li>
+				    <li class="list-group-item">Dapibus ac facilisis in</li>
+				    <li class="list-group-item">Morbi leo risus</li>
+				    <li class="list-group-item">Porta ac consectetur ac</li>
+				    <li class="list-group-item">Vestibulum at eros</li>
+				  </ul>
+				</div>
+					
 			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
