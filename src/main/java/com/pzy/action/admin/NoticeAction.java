@@ -3,6 +3,7 @@ package com.pzy.action.admin;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -12,34 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
 import com.pzy.action.PageAction;
-import com.pzy.entity.Accident;
-import com.pzy.entity.Car;
-import com.pzy.entity.Load;
-import com.pzy.service.AccidentService;
-import com.pzy.service.CarService;
-import com.pzy.service.LoadService;
+import com.pzy.entity.Notice;
+import com.pzy.service.NoticeService;
 
-@Namespace("/admin/accident")
+@Namespace("/admin/notice")
 @ParentPackage("json-default") 
-public class AccidentAction extends PageAction {
+public class NoticeAction extends PageAction {
 	private String name;
-	private Date start;
-	private Date end;
 	private Long id;
-	private Accident accident;
-	private List<Accident> accidents;
-	private List<Car> cars;
-	private List<Load> loads;
+	private Notice notice;
+	private List<Notice> notices;
 	@Autowired
-	private AccidentService accidentService;
-	@Autowired
-	private CarService carService;
-	@Autowired
-	private LoadService loadService;
-	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/accident/index.jsp") })
+	private NoticeService noticeService;
+	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/notice/index.jsp") })
 	public String index() {
-		cars=this.carService.findAll();
-		loads=loadService.findAll();
 		return SUCCESS;
 	}
 
@@ -47,7 +34,7 @@ public class AccidentAction extends PageAction {
 	public String list() {
 		int pageNumber = (int) (this.getIDisplayStart() / this.getIDisplayLength()) + 1;
 		int pageSize =  this.getIDisplayLength();
-		Page<Accident> list = accidentService.findAll(pageNumber, pageSize,start,end);
+		Page<Notice> list = noticeService.findAll(pageNumber, pageSize,name);
 		this.getResultMap().put("aaData", list.getContent());
 		this.getResultMap().put("iTotalRecords", list.getTotalElements());
 		this.getResultMap().put("iTotalDisplayRecords", list.getTotalElements());
@@ -57,7 +44,7 @@ public class AccidentAction extends PageAction {
 
 	@Action(value = "delete", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
 	public String delete() {
-		accidentService.delete(id);
+		noticeService.delete(id);
 		getResultMap().put("state", "success");
 		getResultMap().put("msg", "删除成功");
 		return SUCCESS;
@@ -65,7 +52,7 @@ public class AccidentAction extends PageAction {
 
 	@Action(value = "get", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
 	public String get() {
-		getResultMap().put("object", accidentService.find(id));
+		getResultMap().put("object", noticeService.find(id));
 		getResultMap().put("state", "success");
 		getResultMap().put("msg", "删除成功");
 		return SUCCESS;
@@ -73,21 +60,37 @@ public class AccidentAction extends PageAction {
 
 	@Action(value = "update", results = { @Result(name = "success",  type = "json",params={"ignoreHierarchy","false"}) })  
 	public String update() {
-		Accident bean = accidentService.find(accident.getId());
-		BeanUtils.copyProperties(accident, bean);
-		accidentService.save(accident);
+		Notice bean = noticeService.find(notice.getId());
+		BeanUtils.copyProperties(notice, bean);
+		noticeService.save(notice);
 		getResultMap().put("state", "success");
 		getResultMap().put("msg", "修改成功");
 		return SUCCESS;
 	}
 	@Action(value = "save", results = { @Result(name = "success",  type = "json",params={"ignoreHierarchy","false"}) })  
 	public String saveit() {
-		accidentService.save(accident);
+		notice.setCreateDate(new Date());
+		noticeService.save(notice);
 		getResultMap().put("state", "success");
 		getResultMap().put("msg", "保存成功");
 		return SUCCESS;
 	}
 	
+	public Notice getNotice() {
+		return notice;
+	}
+
+	public void setNotice(Notice notice) {
+		this.notice = notice;
+	}
+
+	public List<Notice> getNotices() {
+		return notices;
+	}
+
+	public void setNotices(List<Notice> notices) {
+		this.notices = notices;
+	}
 
 
 	public String getName() {
@@ -104,51 +107,5 @@ public class AccidentAction extends PageAction {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Accident getAccident() {
-		return accident;
-	}
-
-	public void setAccident(Accident accident) {
-		this.accident = accident;
-	}
-
-	public List<Accident> getAccidents() {
-		return accidents;
-	}
-
-	public void setAccidents(List<Accident> accidents) {
-		this.accidents = accidents;
-	}
-	
-	public List<Car> getCars() {
-		return cars;
-	}
-
-	public void setCars(List<Car> cars) {
-		this.cars = cars;
-	}
-
-	public List<Load> getLoads() {
-		return loads;
-	}
-
-	public void setLoads(List<Load> loads) {
-		this.loads = loads;
-	}
-	public Date getStart() {
-		return start;
-	}
-
-	public void setStart(Date start) {
-		this.start = start;
-	}
-
-	public Date getEnd() {
-		return end;
-	}
-
-	public void setEnd(Date end) {
-		this.end = end;
 	}
 }

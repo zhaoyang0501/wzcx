@@ -32,11 +32,21 @@ jQuery.adminAccident = {
 						$('[rel="popover"],[data-rel="popover"]').popover();
 					},
 					"fnServerData" : function(sSource, aoData, fnCallback) {
-						var name = $("#_name").val();
-						if (!!name) {
+						var start = $("#start_").val();
+						
+						var end = $("#end_").val();
+						alert(end);
+						alert(start);
+						if (!!start) {
 							aoData.push({
-								"name" : "name",
-								"value" : name
+								"name" : "start",
+								"value" : start
+							});
+						}
+						if (!!end) {
+							aoData.push({
+								"name" : "end",
+								"value" : end
 							});
 						}
 						$.ajax({
@@ -58,7 +68,7 @@ jQuery.adminAccident = {
 					}, {
 						"mDataProp" : "type"
 					}, {
-						"mDataProp" : "creaeDate"
+						"mDataProp" : "createDate"
 					}, {
 						"mDataProp" : "remark"
 					}, {
@@ -66,7 +76,7 @@ jQuery.adminAccident = {
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [4],
+							'aTargets' : [6],
 							'fnRender' : function(oObj, sVal) {
 								return "<button class=\"btn2 btn-info\" onclick=\"$.adminAccident.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
 								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminAccident.deleteAccident("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
@@ -118,8 +128,9 @@ jQuery.adminAccident = {
 	    			data:{
 	    				"accident.car.id":$("#carid").val(),
 	    				"accident.load.id":$("#loadid").val(),
-	    				"accident.type":$("type").val(),
-	    				"accident.remark":$("remark").val()
+	    				"accident.type":$("#type").val(),
+	    				"accident.remark":$("#remark").val(),
+	    				"accident.createDate":$("#createDate").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
@@ -137,10 +148,12 @@ jQuery.adminAccident = {
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/accident/update",
 	    			data:{
+	    				"accident.id":$("#id").val(),
 	    				"accident.car.id":$("#carid").val(),
 	    				"accident.load.id":$("#loadid").val(),
-	    				"accident.type":$("type").val(),
-	    				"accident.remark":$("remark").val()
+	    				"accident.type":$("#type").val(),
+	    				"accident.remark":$("#remark").val(),
+	    				"accident.createDate":$("#createDate").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
@@ -171,6 +184,7 @@ jQuery.adminAccident = {
     					$("#loadid").val(json.resultMap.object.load.id);
     					$("#type").val(json.resultMap.object.type);
     					$("#remark").val(json.resultMap.object.remark);
+    					
     				}else{
     					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
     				}

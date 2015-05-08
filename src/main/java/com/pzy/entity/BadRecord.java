@@ -3,9 +3,11 @@ package com.pzy.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +16,8 @@ public class BadRecord {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String no;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Car car;
 	private Date createDate;
 	private String address;
 	public String getAddress() {
@@ -31,12 +34,6 @@ public class BadRecord {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNo() {
-		return no;
-	}
-	public void setNo(String no) {
-		this.no = no;
-	}
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -50,5 +47,10 @@ public class BadRecord {
 		this.type = type;
 	}
 
-	
+	public Car getCar() {
+		return car;
+	}
+	public void setCar(Car car) {
+		this.car = car;
+	}
 }

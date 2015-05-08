@@ -27,10 +27,14 @@ public class BadRecordAction extends PageAction {
 	private Long id;
 	private BadRecord badRecord;
 	private List<BadRecord> badRecords;
+	private  List<Car> cars;
 	@Autowired
 	private BadRecordService badRecordService;
+	@Autowired
+	private CarService carService;
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/badrecord/index.jsp") })
 	public String index() {
+		cars=this.carService.findAll();
 		return SUCCESS;
 	}
 
@@ -110,5 +114,13 @@ public class BadRecordAction extends PageAction {
 
 	public void setBadRecords(List<BadRecord> badRecords) {
 		this.badRecords = badRecords;
+	}
+	
+	public List<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
 	}
 }

@@ -78,7 +78,7 @@
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<label id="_modal_header_label"></label>
 		</div>
-		<div class="modal-body" style="min-height: 500px;">
+		<div class="modal-body" style="min-height: 400px;">
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="form-container grid-form form-background left-align form-horizontal">
@@ -94,7 +94,7 @@
 							<div class="control-group" id='control_projectStep'>
 								<label for="context" class="control-label">新闻内容：</label>
 								<div class="controls">
-									<textarea name=context rows="40" cols="">
+									<textarea id='context' name=context rows="20" cols="">
 									
 									</textarea>
 								</div>

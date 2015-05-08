@@ -29,6 +29,9 @@
 					<li><a href="${pageContext.request.contextPath}/admin/car/index"><i class="icon-upload"></i> 车辆管理 </a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/load/index"><i class="icon-zoom-in"></i> 道路管理</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/badrecord/index"><i class="icon-zoom-in"></i> 违章管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/news/index"><i class="icon-zoom-in"></i> 新闻管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/accident/index"><i class="icon-zoom-in"></i> 事故管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/notice/index"><i class="icon-zoom-in"></i> 公告管理</a></li>
 				</ul>
 			</div>
 		</div>

@@ -52,7 +52,7 @@ jQuery.adminBadRecord = {
 					"aoColumns" : [ {
 						"mDataProp" : "id"
 					},{
-						"mDataProp" : "no"
+						"mDataProp" : "car.id"
 					},{
 						"mDataProp" : "address"
 					}, {
@@ -114,7 +114,7 @@ jQuery.adminBadRecord = {
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/badrecord/save",
 	    			data:{
-	    				"badRecord.no":$("#no").val(),
+	    				"badRecord.car.id":$("#carid").val(),
 	    				"badRecord.address":$("#address").val(),
 	    				"badRecord.type":$("#type").val(),
 	    				"badRecord.createDate":$("#createDate").val(),
@@ -136,7 +136,7 @@ jQuery.adminBadRecord = {
 	    			url : $.ace.getContextPath() + "/admin/badrecord/update",
 	    			data:{
 	    				"badRecord.id":$("#id").val(),
-	    				"badRecord.no":$("#no").val(),
+	    				"badRecord.car.id":$("#carid").val(),
 	    				"badRecord.address":$("#address").val(),
 	    				"badRecord.type":$("#type").val(),
 	    				"badRecord.createDate":$("#createDate").val(),
@@ -166,7 +166,7 @@ jQuery.adminBadRecord = {
     				if(json.resultMap.state=='success'){
     					$("#user_modal_header_label").text("修改分类");
     					$("#_modal").modal('show');
-    					$("#no").val(json.resultMap.object.no);
+    					$("#carid").val(json.resultMap.object.car.id);
     					$("#address").val(json.resultMap.object.address);
     					$("#type").val(json.resultMap.object.type);
     				}else{

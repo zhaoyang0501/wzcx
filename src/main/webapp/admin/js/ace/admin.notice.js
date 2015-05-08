@@ -1,9 +1,9 @@
-jQuery.adminCar = {
-		carDataTable:null,
+jQuery.adminNotice = {
+		noticeDataTable:null,
 		toSave:false,
 		initSearchDataTable : function() {
-			if (this.carDataTable == null) {
-				this.carDataTable = $('#dt_table_view').dataTable({
+			if (this.noticeDataTable == null) {
+				this.noticeDataTable = $('#dt_table_view').dataTable({
 					"sDom" : "<'row-fluid'<'span6'l>r>t<'row-fluid'<'span6'i><'span6'p>>",
 					"sPaginationType" : "bootstrap",
 					"oLanguage" : {
@@ -27,7 +27,7 @@ jQuery.adminCar = {
 					"sServerMethod" : "POST",
 					"bProcessing" : true,
 					"bSort" : false,
-					"sAjaxSource" : $.ace.getContextPath() + "/admin/car/list",
+					"sAjaxSource" : $.ace.getContextPath() + "/admin/notice/list",
 					"fnDrawCallback" : function(oSettings) {
 						$('[rel="popover"],[data-rel="popover"]').popover();
 					},
@@ -49,29 +49,32 @@ jQuery.adminCar = {
 							}
 						});
 					},
-					"aoColumns" : [{
+					"aoColumns" : [ {
 						"mDataProp" : "id"
 					},{
-						"mDataProp" : "category.name"
+						"mDataProp" : "title"
+					},{
+						"mDataProp" : "context"
 					}, {
-						"mDataProp" : "engineNo"
-					}, {
-						"mDataProp" : "owner"
-					}, {
-						"mDataProp" : "trademark"
-					}, {
-						"mDataProp" : "color"
-					}, {
-						"mDataProp" : "gearbox"
+						"mDataProp" : "createDate"
 					}, {
 						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [7],
+							'aTargets' : [2],
 							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminCar.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminCar.deleteCar("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								if(sVal.length>10)
+									return sVal.substring(0,10)+".....";
+								else 
+									return sVal;
+							}
+						},
+						{
+							'aTargets' : [4],
+							'fnRender' : function(oObj, sVal) {
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminNotice.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminNotice.deleteNotice("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
@@ -82,23 +85,23 @@ jQuery.adminCar = {
 
 				});
 			} else {
-				var oSettings = this.carDataTable.fnSettings();
+				var oSettings = this.noticeDataTable.fnSettings();
 				oSettings._iDisplayStart = 0;
-				this.carDataTable.fnDraw(oSettings);
+				this.noticeDataTable.fnDraw(oSettings);
 			}
 
 		},
-		deleteCar :function(id){
+		deleteNotice :function(id){
 			bootbox.confirm( "是否确认删除？", function (result) {
 	            if(result){
 	            	$.ajax({
 	        			type : "get",
-	        			url : $.ace.getContextPath() + "/admin/car/delete?id="+id,
+	        			url : $.ace.getContextPath() + "/admin/notice/delete?id="+id,
 	        			dataType : "json",
 	        			success : function(json) {
 	        				if(json.resultMap.state=='success'){
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	        					$.adminCar.initSearchDataTable();
+	        					$.adminNotice.initSearchDataTable();
 	        				}else{
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
 	        				}
@@ -108,30 +111,24 @@ jQuery.adminCar = {
 	        });
 		},
 		showaddModal: function(id){
-			$.adminCar.toSave=true;
+			$.adminNotice.toSave=true;
 			$("#user_modal_header_label").text("新增分类");
 			$("#_modal").modal('show');
-			$("#id").attr("readonly",false);
 		},
-		save : function (){
-			if($.adminCar.toSave){
+		save :function (){
+			if($.adminNotice.toSave){
 				$.ajax({
 	    			type : "post",
-	    			url : $.ace.getContextPath() + "/admin/car/save",
+	    			url : $.ace.getContextPath() + "/admin/notice/save",
 	    			data:{
-	    				"car.id":$("#id").val(),
-	    				"car.category.id":$("#categoryid").val(),
-	    				"car.engineNo":$("#engineNo").val(),
-	    				"car.owner":$("#owner").val(),
-	    				"car.trademark":$("#trademark").val(),
-	    				"car.color":$("#color").val(),
-	    				"car.gearbox":$("#gearbox").val()
+	    				"notice.title":$("#title").val(),
+	    				"notice.context":$("#context").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
 	    				if(json.resultMap.state=='success'){
 	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	    					$.adminCar.initSearchDataTable();
+	    					$.adminNotice.initSearchDataTable();
 	    					$("#_modal").modal('hide');
 	    				}else{
 	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
@@ -141,22 +138,18 @@ jQuery.adminCar = {
 			}else{
 				$.ajax({
 	    			type : "post",
-	    			url : $.ace.getContextPath() + "/admin/car/update",
+	    			url : $.ace.getContextPath() + "/admin/notice/update",
 	    			data:{
-	    				"car.id":$("#id").val(),
-	    				"car.category.id":$("#categoryid").val(),
-	    				"car.engineNo":$("#engineNo").val(),
-	    				"car.owner":$("#owner").val(),
-	    				"car.trademark":$("#trademark").val(),
-	    				"car.color":$("#color").val(),
-	    				"car.gearbox":$("#gearbox").val()
+	    				"notice.id":$("#id").val(),
+	    				"notice.title":$("#title").val(),
+	    				"notice.context":$("#context").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
 	    				if(json.resultMap.state=='success'){
 	    					$("#user_edit_modal").modal('hide');
 	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	    					$.adminCar.initSearchDataTable();
+	    					$.adminNotice.initSearchDataTable();
 	    					$("#_modal").modal('hide');
 	    				}else{
 	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
@@ -167,23 +160,17 @@ jQuery.adminCar = {
 		},
 		showEdit: function (id){
 			$("#id").val(id);
-			$.adminCar.toSave=false;
+			$.adminNotice.toSave=false;
 			$.ajax({
     			type : "get",
-    			url : $.ace.getContextPath() + "/admin/car/get?id="+id,
+    			url : $.ace.getContextPath() + "/admin/notice/get?id="+id,
     			dataType : "json",
     			success : function(json) {
     				if(json.resultMap.state=='success'){
     					$("#user_modal_header_label").text("修改分类");
-    					$("#id").attr("readonly","readonly");
     					$("#_modal").modal('show');
-    					$("#categoryid").val(json.resultMap.object.categoryid);
-    					$("#engineNo").val(json.resultMap.object.engineNo);
-    					$("#owner").val(json.resultMap.object.owner);
-    					$("#trademark").val(json.resultMap.object.trademark);
-    					$("#color").val(json.resultMap.object.color);
-    					$("#gearbox").val(json.resultMap.object.gearbox);
-    					
+    					$("#title").val(json.resultMap.object.title);
+    					$("#context").val(json.resultMap.object.context);
     				}else{
     					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
     				}

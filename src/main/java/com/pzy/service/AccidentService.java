@@ -1,6 +1,7 @@
 
 package com.pzy.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -30,13 +31,30 @@ public class AccidentService {
      
      public Page<Accident> findAll(final int pageNumber, final int pageSize,final String no){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
-        
          Specification<Accident> spec = new Specification<Accident>() {
               public Predicate toPredicate(Root<Accident> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
               Predicate predicate = cb.conjunction();
               if (no != null) {
                    predicate.getExpressions().add(cb.like(root.get("no").as(String.class), "%"+no+"%"));
               }
+              return predicate;
+              }
+         };
+         Page<Accident> result = (Page<Accident>) bccidentRepository.findAll(spec, pageRequest);
+         return result;
+     	}
+     
+     public Page<Accident> findAll(final int pageNumber, final int pageSize,final Date start,final Date end){
+         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Specification<Accident> spec = new Specification<Accident>() {
+              public Predicate toPredicate(Root<Accident> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+              Predicate predicate = cb.conjunction();
+              if (start != null) {
+                  predicate.getExpressions().add(cb.greaterThan(root.get("createDate").as(Date.class),start));
+               }
+               if (end!=null) {
+             	  predicate.getExpressions().add(cb.lessThan(root.get("createDate").as(Date.class),end));
+               }
               return predicate;
               }
          };

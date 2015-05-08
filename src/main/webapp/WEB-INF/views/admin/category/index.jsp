@@ -39,10 +39,10 @@
 					<div class="span12">
 						<div class="content-widgets light-gray">
 							<div class="widget-head  bondi-blue" >
-								<h3>分类管理</h3>
+								<h3>车型管理</h3>
 							</div>
 							<div class="box well form-inline">
-								<span>名称：</span>
+								<span>车型名称：</span>
 								<input type="text" id="category_name" >
 								<a onclick="$.adminCategory.initSearchDataTable()"
 									class="btn btn-info" data-loading-text="正在加载..."><i class="icon-search"></i>查询</a>

@@ -54,7 +54,6 @@
 									id="dt_table_view">
 									<thead>
 										<tr>
-											<th >id</th>
 											<th >车牌号码</th>
 											<th >车型</th>
 											<th >发动机编号</th>
@@ -88,12 +87,10 @@
 				<div class="span12">
 					<div class="form-container grid-form form-background left-align form-horizontal">
 						<form action="" method="get" id=''>
-							<input type="hidden" id="id" value="">
-							
 							<div class="control-group">
-								<label for="no" class="control-label">车牌号码：</label>
+								<label for="id" class="control-label">车牌号码：</label>
 								<div class="controls">
-									<input type="text" id="no" placeholder="">
+									<input type="text" id="id" placeholder="" >
 								</div>
 							</div>
 							<div class="control-group">

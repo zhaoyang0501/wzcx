@@ -62,6 +62,15 @@ jQuery.adminNews = {
 					}],
 					"aoColumnDefs" : [
 						{
+							'aTargets' : [2],
+							'fnRender' : function(oObj, sVal) {
+								if(sVal.length>10)
+									return sVal.substring(0,10)+".....";
+								else 
+									return sVal;
+							}
+						},
+						{
 							'aTargets' : [4],
 							'fnRender' : function(oObj, sVal) {
 								return "<button class=\"btn2 btn-info\" onclick=\"$.adminNews.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
@@ -106,14 +115,14 @@ jQuery.adminNews = {
 			$("#user_modal_header_label").text("新增分类");
 			$("#_modal").modal('show');
 		},
-		save : function (){
+		save :function (){
 			if($.adminNews.toSave){
 				$.ajax({
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/news/save",
 	    			data:{
-	    				"badRecord.title":$("#title").val(),
-	    				"badRecord.context":$("#context").val()
+	    				"news.title":$("#title").val(),
+	    				"news.context":$("#context").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
@@ -131,9 +140,9 @@ jQuery.adminNews = {
 	    			type : "post",
 	    			url : $.ace.getContextPath() + "/admin/news/update",
 	    			data:{
-	    				"badRecord.id":$("#id").val(),
-	    				"badRecord.title":$("#title").val(),
-	    				"badRecord.context":$("#context").val()
+	    				"news.id":$("#id").val(),
+	    				"news.title":$("#title").val(),
+	    				"news.context":$("#context").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {

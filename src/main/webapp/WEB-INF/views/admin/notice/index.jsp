@@ -4,7 +4,7 @@
 <html lang="ch">
 <%@ include file="../common/meta.jsp"%>
 <head>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/ace/admin.badrecord.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/ace/admin.notice.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/falgun/bootbox.js"></script>
 <script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -39,26 +39,25 @@
 					<div class="span12">
 						<div class="content-widgets light-gray">
 							<div class="widget-head  bondi-blue" >
-								<h3>违章管理</h3>
+								<h3>公告管理</h3>
 							</div>
 							<div class="box well form-inline">
-								<span>车牌号码：</span>
+								<span>标题：</span>
 								<input type="text" id="_name" >
-								<a onclick="$.adminBadRecord.initSearchDataTable()"
+								<a onclick="$.adminNotice.initSearchDataTable()"
 									class="btn btn-info" data-loading-text="正在加载..."><i class="icon-search"></i>查询</a>
 							</div>
 							<div class="widget-container">
 								
-									<a class="btn btn-success" style="float: right; margin: 5px;" onclick="$.adminBadRecord.showaddModal()"><i class="icon-plus"></i> 新增</a>
+									<a class="btn btn-success" style="float: right; margin: 5px;" onclick="$.adminNotice.showaddModal()"><i class="icon-plus"></i>发布</a>
 								<table class="responsive table table-striped table-bordered"
 									id="dt_table_view">
 									<thead>
 										<tr>
 											<th >id</th>
-											<th >车牌号码</th>
-											<th >违章地址</th>
-											<th >违章类型</th>
-											<th >违章日期</th>
+											<th >标题</th>
+											<th >正文</th>
+											<th >发布时间</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -79,7 +78,7 @@
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<label id="_modal_header_label"></label>
 		</div>
-		<div class="modal-body" style="min-height: 200px;">
+		<div class="modal-body" style="min-height: 400px;">
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="form-container grid-form form-background left-align form-horizontal">
@@ -87,45 +86,17 @@
 							<input type="hidden" id="id" value="">
 							
 							<div class="control-group">
-								<label for="name" class="control-label">车牌号码：</label>
+								<label for="title" class="control-label">公告标题：</label>
 								<div class="controls">
-									<select name='carid' id="carid">
-										<c:forEach items="${cars}" var="bean">
-											<option value="${bean.id }">${bean.id }</option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-							<div class="control-group">
-								<label for="address" class="control-label">违章地址：</label>
-								<div class="controls">
-										<input type="text" id="address" placeholder="">
-								</div>
-							</div>
-							<div class="control-group">
-								<label for='type' class="control-label">违章类型：</label>
-								<div class="controls">
-									<select id='type' >
-										<option value=""></option>
-										<option value="闯红灯">闯红灯</option>
-										<option value="不按规定道路行驶">不按规定道路行驶</option>
-										<option value="违法停车">违法停车</option>
-										<option value="违章掉头">违章掉头</option>
-										<option value="违法静止标志">违法静止标志</option>
-										<option value="超速10-20%">超速10-20%</option>
-										<option value="超速20-50%">超速20-50%</option>
-										<option value="超速50%以上">超速50%以上</option>
-										<option value="超载">超载</option>
-									</select>
+									<input type="text" id="title" placeholder="">
 								</div>
 							</div>
 							<div class="control-group" id='control_projectStep'>
-								<label for="createDate" class="control-label">违章时间：</label>
+								<label for="context" class="control-label">公告内容：</label>
 								<div class="controls">
-									<div class=" input-append date">
-										 <input id="createDate"  type="text" value="" readonly="readonly" >
-										 <span class="add-on"><i class="icon-th"></i></span>
-									</div>
+									<textarea id='context' name=context rows="20" cols="">
+									
+									</textarea>
 								</div>
 							</div>
 						</form>
@@ -135,7 +106,7 @@
 		</div>
 		
 		<div class="modal-footer center" id="div_footer">
-			<a class="btn btn-primary" onclick="$.adminBadRecord.save()">保存</a>
+			<a class="btn btn-primary" onclick="$.adminNotice.save()">保存</a>
 			<a href="#" class="btn" data-dismiss="modal" id="closeViewModal">关闭</a>
 		</div>
 	</div>
