@@ -1,20 +1,22 @@
 package com.pzy.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "t_car")
 public class Car {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String no;
+	@GenericGenerator(name = "paymentableGenerator", strategy = "assigned")  
+	@Column(length=40)
+	private String id;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 	private String engineNo;
@@ -22,18 +24,6 @@ public class Car {
 	private String trademark;
 	private String color;
 	private String gearbox;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getNo() {
-		return no;
-	}
-	public void setNo(String no) {
-		this.no = no;
-	}
 	public Category getCategory() {
 		return category;
 	}
@@ -69,5 +59,11 @@ public class Car {
 	}
 	public void setGearbox(String gearbox) {
 		this.gearbox = gearbox;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

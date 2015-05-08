@@ -16,42 +16,40 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.pzy.entity.Car;
-import com.pzy.entity.Category;
-import com.pzy.repository.CarRepository;
-import com.pzy.repository.CategoryRepository;
+import com.pzy.entity.Accident;
+import com.pzy.repository.AccidentRepository;
 
 @Service
-public class CarService {
+public class AccidentService {
      @Autowired
-     private CarRepository carRepository;
+     private AccidentRepository bccidentRepository;
      
-     public List<Car> findAll() {
-         return (List<Car>) carRepository.findAll();
+     public List<Accident> findAll() {
+         return (List<Accident>) bccidentRepository.findAll();
      }
      
-     public Page<Car> findAll(final int pageNumber, final int pageSize,final String no){
+     public Page<Accident> findAll(final int pageNumber, final int pageSize,final String no){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
         
-         Specification<Car> spec = new Specification<Car>() {
-              public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+         Specification<Accident> spec = new Specification<Accident>() {
+              public Predicate toPredicate(Root<Accident> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
               Predicate predicate = cb.conjunction();
               if (no != null) {
-                   predicate.getExpressions().add(cb.like(root.get("no").as(String.class), no+"%"));
+                   predicate.getExpressions().add(cb.like(root.get("no").as(String.class), "%"+no+"%"));
               }
               return predicate;
               }
          };
-         Page<Car> result = (Page<Car>) carRepository.findAll(spec, pageRequest);
+         Page<Accident> result = (Page<Accident>) bccidentRepository.findAll(spec, pageRequest);
          return result;
      	}
-		public void delete(String id){
-			carRepository.delete(id);
+		public void delete(Long id){
+			bccidentRepository.delete(id);
 		}
-		public Car find(String id){
-			  return carRepository.findOne(id);
+		public Accident find(Long id){
+			  return bccidentRepository.findOne(id);
 		}
-		public void save(Car car){
-			carRepository.save(car);
+		public void save(Accident bccident){
+			bccidentRepository.save(bccident);
 		}
 }

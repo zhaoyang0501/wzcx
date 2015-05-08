@@ -20,7 +20,7 @@ import com.pzy.service.CategoryService;
 @ParentPackage("json-default") 
 public class CarAction extends PageAction {
 	private String name;
-	private Long id;
+	private String id;
 	private Car car;
 	private List<Car> cars;
 	private List<Category> categorys;
@@ -89,11 +89,11 @@ public class CarAction extends PageAction {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Car getCar() {
