@@ -35,6 +35,7 @@
 									<a href="help.htm">违章查询</a>
 								</li>
 							</ul>
+							<!-- 
 							<ul class="nav pull-right">
 								<li>
 									<a href="profile.htm">苏A2rtdD</a>
@@ -43,6 +44,7 @@
 									<a href="login.htm">退出</a>
 								</li>
 							</ul>
+							 -->
 						</div>
 					</div>
 				</div>

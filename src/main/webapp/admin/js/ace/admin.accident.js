@@ -33,10 +33,7 @@ jQuery.adminAccident = {
 					},
 					"fnServerData" : function(sSource, aoData, fnCallback) {
 						var start = $("#start_").val();
-						
 						var end = $("#end_").val();
-						alert(end);
-						alert(start);
 						if (!!start) {
 							aoData.push({
 								"name" : "start",

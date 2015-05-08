@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 @Entity
 @Table(name = "t_badrecord")
 public class BadRecord {
@@ -34,6 +36,7 @@ public class BadRecord {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	@JSON(format="yyyy-MM-dd")
 	public Date getCreateDate() {
 		return createDate;
 	}

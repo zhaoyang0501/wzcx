@@ -17,6 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pzy.entity.BadRecord;
+import com.pzy.entity.Car;
 import com.pzy.repository.BadRecordRepository;
 
 @Service
@@ -28,14 +29,14 @@ public class BadRecordService {
          return (List<BadRecord>) badRecordRepository.findAll();
      }
      
-     public Page<BadRecord> findAll(final int pageNumber, final int pageSize,final String no){
+     public Page<BadRecord> findAll(final int pageNumber, final int pageSize,final Car car){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
         
          Specification<BadRecord> spec = new Specification<BadRecord>() {
               public Predicate toPredicate(Root<BadRecord> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
               Predicate predicate = cb.conjunction();
-              if (no != null) {
-                   predicate.getExpressions().add(cb.like(root.get("no").as(String.class), "%"+no+"%"));
+              if (car != null) {
+                   predicate.getExpressions().add(cb.equal(root.get("car").as(Car.class), car));
               }
               return predicate;
               }

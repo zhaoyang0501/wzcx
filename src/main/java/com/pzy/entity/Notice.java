@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 @Entity
 @Table(name = "t_notice")
 public class Notice {
@@ -35,6 +37,7 @@ public class Notice {
 	private String title;
 	private String context;
 	private Date createDate;
+	@JSON(format="yyyy-MM-dd")
 	public Date getCreateDate() {
 		return createDate;
 	}

@@ -17,28 +17,20 @@
 			<div class="navbar">
 				<div class="navbar-inner">
 					<div class="container">
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">违章查询</a>
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">违章查询系统</a>
 						<div class="nav-collapse">
 							<ul class="nav">
 								<li >
-									<a href="index.html">新闻查询</a>
+									<a href="news">新闻查询</a>
 								</li>
 								<li>
-									<a href="settings.htm">公告查询</a>
+									<a href="notice">公告查询</a>
 								</li>
 								<li >
-									<a href="help.htm">道路查询</a>
+									<a href="load">道路查询</a>
 								</li>
 								<li class="active">
-									<a href="help.htm">违章查询</a>
-								</li>
-							</ul>
-							<ul class="nav pull-right">
-								<li>
-									<a href="profile.htm">苏A2rtdD</a>
-								</li>
-								<li>
-									<a href="login.htm">退出</a>
+									<a href="badrecord">违章查询</a>
 								</li>
 							</ul>
 						</div>

@@ -1,8 +1,9 @@
-jQuery.badrecord = {
-		badrecordDataTable:null,
+jQuery.news = {
+		newsDataTable:null,
+		toSave:false,
 		initSearchDataTable : function() {
-			if (this.badrecordDataTable == null) {
-				this.badrecordDataTable = $('#dt_table_view').dataTable({
+			if (this.newsDataTable == null) {
+				this.newsDataTable = $('#dt_table_view').dataTable({
 					"sDom" : "<'row-fluid'<'span6'l>r>t<'row-fluid'<'span6'i><'span6'p>>",
 					"sPaginationType" : "bootstrap",
 					"oLanguage" : {
@@ -26,18 +27,23 @@ jQuery.badrecord = {
 					"sServerMethod" : "POST",
 					"bProcessing" : true,
 					"bSort" : false,
-					bInfo:false,
-					bLengthChange:false,
-					"sAjaxSource" : $.ace.getContextPath() + "/badrecord/list",
+					"sAjaxSource" : $.ace.getContextPath() + "/news/list",
 					"fnDrawCallback" : function(oSettings) {
 						$('[rel="popover"],[data-rel="popover"]').popover();
 					},
 					"fnServerData" : function(sSource, aoData, fnCallback) {
-						var name = $("#_name").val();
-						if (!!name) {
+						var start = $("#start_").val();
+						var end = $("#end_").val();
+						if (!!start) {
 							aoData.push({
-								"name" : "name",
-								"value" : name
+								"name" : "start",
+								"value" : start
+							});
+						}
+						if (!!end) {
+							aoData.push({
+								"name" : "end",
+								"value" : end
 							});
 						}
 						$.ajax({
@@ -50,24 +56,45 @@ jQuery.badrecord = {
 							}
 						});
 					},
-					"aoColumns" : [{
+					"aoColumns" : [ {
 						"mDataProp" : "id"
 					},{
-						"mDataProp" : "car.id"
+						"mDataProp" : "title"
+					},{
+						"mDataProp" : "context"
 					}, {
 						"mDataProp" : "createDate"
 					}, {
-						"mDataProp" : "type"
-					}, {
-						"mDataProp" : "address"
+						"mDataProp" : ""
+					}],
+					"aoColumnDefs" : [
+						{
+							'aTargets' : [2],
+							'fnRender' : function(oObj, sVal) {
+								if(sVal.length>10)
+									return sVal.substring(0,10)+".....";
+								else 
+									return sVal;
+							}
+						},
+						{
+							'aTargets' : [4],
+							'fnRender' : function(oObj, sVal) {
+								return  "<a href=\"newsdetail?id="+oObj.aData.id+"\" target=\"_blank\">查看</a>";
+							}
+						},
+					 {
+						'aTargets' : [ '_all' ],
+						'bSortable' : false,
+						'sClass' : 'center'
 					}]
 
 				});
 			} else {
-				var oSettings = this.badrecordDataTable.fnSettings();
+				var oSettings = this.newsDataTable.fnSettings();
 				oSettings._iDisplayStart = 0;
-				this.badrecordDataTable.fnDraw(oSettings);
+				this.newsDataTable.fnDraw(oSettings);
 			}
 
-		},
+		}
 };

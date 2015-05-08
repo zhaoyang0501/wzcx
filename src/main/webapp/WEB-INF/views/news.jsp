@@ -17,16 +17,16 @@
 			<div class="navbar">
 				<div class="navbar-inner">
 					<div class="container">
-						<a class="btn btn-navbar" data-toggle="collapse" data-target="nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">违章查询系统</a>
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">违章查询系统</a>
 						<div class="nav-collapse">
 							<ul class="nav">
-								<li >
-									<a href="news">新闻查询</a>
+								<li class="active">
+									<a href="news" >新闻查询</a>
 								</li>
 								<li>
 									<a href="notice">公告查询</a>
 								</li>
-								<li class="active" >
+								<li >
 									<a href="load" >道路查询</a>
 								</li>
 								<li >
@@ -39,29 +39,37 @@
 			</div>
 			<div class="row">
 				<div class="span12 ">
-					<h2>道路查询</h2>
+					<h2>新闻查询</h2>
 					<form class="form-inline well" >
-						<label class="control-label" for="inputEmail"></label>
-					  <input type="text" class="input-small" id='_name' placeholder="道路名称">
-					  <button type="button" class="btn" onclick="$.load.initSearchDataTable()">查询</button>
+					  <div class="input-append date">
+									<input id="start_" type="text" value="" readonly="readonly" style="width:80px;">
+									<span class="add-on"><i class="icon-th"></i></span>
+								</div>
+								<span >~</span>
+								<div class="input-append date">
+									<input id="end_" type="text" value="" readonly="readonly" style="width:80px;">
+									<span class="add-on"><i class="icon-th"></i></span>
+								</div>
+
+					  <button type="button" class="btn" onclick="$.news.initSearchDataTable()">查询</button>
 					</form>
 					<table class="table table-bordered table-striped" id='dt_table_view'>
 						<thead>
 							<tr>
 								<th>
-									道路名称
+									id
 								</th>
 								<th>
-									单行道
+									标题
 								</th>
 								<th>
-									车道数
+									内容
 								</th>
 								<th>
-									最低时速
+									发布时间
 								</th>
 								<th>
-									最高时速
+									查看
 								</th>
 							</tr>
 						</thead>
@@ -76,13 +84,27 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/site.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/load.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/news.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/ace.js"></script>
 		<script src="${pageContext.request.contextPath}/admin/js/falgun/jquery.dataTables.min.js"></script>
 		<script src="${pageContext.request.contextPath}/admin/js/falgun/dataTables.bootstrap.js"></script>
 		<script src="${pageContext.request.contextPath}/admin/js/falgun/TableTools.min.js"></script>
+			<script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.min.js"></script>
+		<script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.zh-CN.js"></script>
+	
 		<script type="text/javascript">
 	$(function(){
+		$(".date").datetimepicker({
+			language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+	        format:'yyyy-mm-dd',
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+	    });
 		$.ace.setContextPath('${pageContext.request.contextPath}');
 	});
 	</script>

@@ -1,26 +1,24 @@
-package com.pzy.action.admin;
+package com.pzy.action;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
-import com.pzy.action.PageAction;
 import com.pzy.entity.BadRecord;
 import com.pzy.entity.Car;
-import com.pzy.entity.Category;
-import com.pzy.entity.Load;
 import com.pzy.service.BadRecordService;
 import com.pzy.service.CarService;
-import com.pzy.service.CategoryService;
-import com.pzy.service.LoadService;
 
-@Namespace("/admin/badrecord")
+@Namespace("/badrecord")
 @ParentPackage("json-default") 
 public class BadRecordAction extends PageAction {
 	private String name;
@@ -32,60 +30,19 @@ public class BadRecordAction extends PageAction {
 	private BadRecordService badRecordService;
 	@Autowired
 	private CarService carService;
-	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/badrecord/index.jsp") })
-	public String index() {
-		cars=this.carService.findAll();
-		return SUCCESS;
-	}
 
 	@Action(value = "list", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
 	public String list() {
 		int pageNumber = (int) (this.getIDisplayStart() / this.getIDisplayLength()) + 1;
 		int pageSize =  this.getIDisplayLength();
-		
-		Page<BadRecord> list = badRecordService.findAll(pageNumber, pageSize,carService.find(name));
-		this.getResultMap().put("aaData", list.getContent());
+		Car car=carService.find(name);
+		Page<BadRecord> list= badRecordService.findAll(pageNumber, pageSize,car);
+		this.getResultMap().put("aaData", car==null?new ArrayList():list.getContent());
 		this.getResultMap().put("iTotalRecords", list.getTotalElements());
 		this.getResultMap().put("iTotalDisplayRecords", list.getTotalElements());
 		this.getResultMap().put("sEcho", getSEcho());
 		return SUCCESS;
 	}
-
-	@Action(value = "delete", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
-	public String delete() {
-		badRecordService.delete(id);
-		getResultMap().put("state", "success");
-		getResultMap().put("msg", "删除成功");
-		return SUCCESS;
-	}
-
-	@Action(value = "get", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
-	public String get() {
-		getResultMap().put("object", badRecordService.find(id));
-		getResultMap().put("state", "success");
-		getResultMap().put("msg", "删除成功");
-		return SUCCESS;
-	}
-
-	@Action(value = "update", results = { @Result(name = "success",  type = "json",params={"ignoreHierarchy","false"}) })  
-	public String update() {
-		BadRecord bean = badRecordService.find(badRecord.getId());
-		BeanUtils.copyProperties(badRecord, bean);
-		badRecordService.save(badRecord);
-		getResultMap().put("state", "success");
-		getResultMap().put("msg", "修改成功");
-		return SUCCESS;
-	}
-	@Action(value = "save", results = { @Result(name = "success",  type = "json",params={"ignoreHierarchy","false"}) })  
-	public String saveit() {
-		badRecordService.save(badRecord);
-		getResultMap().put("state", "success");
-		getResultMap().put("msg", "保存成功");
-		return SUCCESS;
-	}
-	
-
-
 	public String getName() {
 		return name;
 	}

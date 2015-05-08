@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.apache.struts2.json.annotations.JSON;
 @Entity
 @Table(name = "t_category")
 public class Category {
@@ -17,7 +19,6 @@ public class Category {
 	private String name;
 	
 	private String remark;
-	
 	private Date createDate;
 	
 	public Long getId() {
@@ -38,6 +39,7 @@ public class Category {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	@JSON(format="yyyy-MM-dd")
 	public Date getCreateDate() {
 		return createDate;
 	}

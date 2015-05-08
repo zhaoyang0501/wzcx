@@ -49,6 +49,9 @@ public class CarService {
 			carRepository.delete(id);
 		}
 		public Car find(String id){
+			if(id==null)
+				return null;
+			else 
 			  return carRepository.findOne(id);
 		}
 		public void save(Car car){
