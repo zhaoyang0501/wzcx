@@ -1,6 +1,7 @@
 package com.pzy.action.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -48,10 +49,16 @@ public class CarAction extends PageAction {
 
 	@Action(value = "delete", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
 	public String delete() {
-		carService.delete(id);
-		getResultMap().put("state", "success");
-		getResultMap().put("msg", "删除成功");
-		return SUCCESS;
+		try {
+			carService.delete(id);
+			getResultMap().put("state", "success");
+			getResultMap().put("msg", "删除成功");
+		} catch (Exception e) {
+			 getResultMap().put("state", "error");
+			 getResultMap().put("msg", "删除失败，外键约束");
+		}
+        return SUCCESS;
+		
 	}
 
 	@Action(value = "get", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  

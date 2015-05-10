@@ -70,8 +70,8 @@ jQuery.adminCar = {
 						{
 							'aTargets' : [7],
 							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminCar.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminCar.deleteCar("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminCar.showEdit('"+oObj.aData.id+"')\"><i class=\"icon-pencil\"></i>修改</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminCar.deleteCar('"+oObj.aData.id+"')\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
@@ -92,9 +92,10 @@ jQuery.adminCar = {
 			bootbox.confirm( "是否确认删除？", function (result) {
 	            if(result){
 	            	$.ajax({
-	        			type : "get",
-	        			url : $.ace.getContextPath() + "/admin/car/delete?id="+id,
+	        			type : "post",
+	        			url : $.ace.getContextPath() + "/admin/car/delete",
 	        			dataType : "json",
+	        			data:"id="+id,
 	        			success : function(json) {
 	        				if(json.resultMap.state=='success'){
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
@@ -169,9 +170,10 @@ jQuery.adminCar = {
 			$("#id").val(id);
 			$.adminCar.toSave=false;
 			$.ajax({
-    			type : "get",
-    			url : $.ace.getContextPath() + "/admin/car/get?id="+id,
+    			type : "post",
+    			url : $.ace.getContextPath() + "/admin/car/get",
     			dataType : "json",
+    			data:"id="+id,
     			success : function(json) {
     				if(json.resultMap.state=='success'){
     					$("#user_modal_header_label").text("修改分类");
