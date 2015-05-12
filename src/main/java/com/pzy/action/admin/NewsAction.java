@@ -62,6 +62,7 @@ public class NewsAction extends PageAction {
 	public String update() {
 		News bean = newsService.find(news.getId());
 		BeanUtils.copyProperties(news, bean);
+		bean.setCreateDate(new Date());
 		newsService.save(news);
 		getResultMap().put("state", "success");
 		getResultMap().put("msg", "修改成功");

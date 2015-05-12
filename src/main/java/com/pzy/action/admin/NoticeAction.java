@@ -62,6 +62,7 @@ public class NoticeAction extends PageAction {
 	public String update() {
 		Notice bean = noticeService.find(notice.getId());
 		BeanUtils.copyProperties(notice, bean);
+		bean.setCreateDate(new Date());
 		noticeService.save(notice);
 		getResultMap().put("state", "success");
 		getResultMap().put("msg", "修改成功");
