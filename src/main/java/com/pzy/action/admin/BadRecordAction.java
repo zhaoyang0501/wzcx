@@ -12,10 +12,12 @@ import org.springframework.data.domain.Page;
 
 import com.pzy.action.PageAction;
 import com.pzy.entity.BadRecord;
+import com.pzy.entity.BadRecordType;
 import com.pzy.entity.Car;
 import com.pzy.entity.Category;
 import com.pzy.entity.Load;
 import com.pzy.service.BadRecordService;
+import com.pzy.service.BadRecordTypeService;
 import com.pzy.service.CarService;
 import com.pzy.service.CategoryService;
 import com.pzy.service.LoadService;
@@ -28,12 +30,16 @@ public class BadRecordAction extends PageAction {
 	private BadRecord badRecord;
 	private List<BadRecord> badRecords;
 	private  List<Car> cars;
+	private List<BadRecordType> badRecordTypes;
 	@Autowired
 	private BadRecordService badRecordService;
 	@Autowired
 	private CarService carService;
+	@Autowired
+	private BadRecordTypeService badRecordTypeService;
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/badrecord/index.jsp") })
 	public String index() {
+		badRecordTypes=badRecordTypeService.findAll();
 		cars=this.carService.findAll();
 		return SUCCESS;
 	}
@@ -84,7 +90,13 @@ public class BadRecordAction extends PageAction {
 		return SUCCESS;
 	}
 	
+	public List<BadRecordType> getBadRecordTypes() {
+		return badRecordTypes;
+	}
 
+	public void setBadRecordTypes(List<BadRecordType> badRecordTypes) {
+		this.badRecordTypes = badRecordTypes;
+	}
 
 	public String getName() {
 		return name;

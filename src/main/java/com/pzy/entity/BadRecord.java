@@ -22,14 +22,22 @@ public class BadRecord {
 	private Car car;
 	private Date createDate;
 	private String address;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private BadRecordType badRecordType;
+	private String state;
+	
+	public BadRecordType getBadRecordType() {
+		return badRecordType;
+	}
+	public void setBadRecordType(BadRecordType badRecordType) {
+		this.badRecordType = badRecordType;
+	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	private String type;
-	
 	public Long getId() {
 		return id;
 	}
@@ -43,17 +51,16 @@ public class BadRecord {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public Car getCar() {
 		return car;
 	}
 	public void setCar(Car car) {
 		this.car = car;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 }

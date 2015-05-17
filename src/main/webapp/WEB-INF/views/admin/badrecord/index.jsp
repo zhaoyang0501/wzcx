@@ -58,7 +58,11 @@
 											<th >车牌号码</th>
 											<th >违章地址</th>
 											<th >违章类型</th>
+											<th >扣分</th>
+											<th >扣款</th>
 											<th >违章日期</th>
+											<th >状态</th>
+												<th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -106,16 +110,9 @@
 								<label for='type' class="control-label">违章类型：</label>
 								<div class="controls">
 									<select id='type' >
-										<option value=""></option>
-										<option value="闯红灯">闯红灯</option>
-										<option value="不按规定道路行驶">不按规定道路行驶</option>
-										<option value="违法停车">违法停车</option>
-										<option value="违章掉头">违章掉头</option>
-										<option value="违法静止标志">违法静止标志</option>
-										<option value="超速10-20%">超速10-20%</option>
-										<option value="超速20-50%">超速20-50%</option>
-										<option value="超速50%以上">超速50%以上</option>
-										<option value="超载">超载</option>
+										<c:forEach items="${badRecordTypes}" var="bean">
+											<option value="${bean.id }">${bean.name }</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
@@ -126,6 +123,16 @@
 										 <input id="createDate"  type="text" value="" readonly="readonly" >
 										 <span class="add-on"><i class="icon-th"></i></span>
 									</div>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<label for="state" class="control-label">处理状态：</label>
+								<div class="controls">
+									<select name='state' id="state">
+											<option value="已经处理">已经处理</option>
+											<option value="未处理">未处理</option>
+									</select>
 								</div>
 							</div>
 						</form>

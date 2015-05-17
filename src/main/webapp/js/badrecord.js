@@ -57,10 +57,24 @@ jQuery.badrecord = {
 					}, {
 						"mDataProp" : "createDate"
 					}, {
-						"mDataProp" : "type"
-					}, {
 						"mDataProp" : "address"
-					}]
+					}, {
+						"mDataProp" : "badRecordType.name"
+					}, {
+						"mDataProp" : "badRecordType.cash"
+					}, {
+						"mDataProp" : "badRecordType.score"
+					}, {
+						"mDataProp" : "state"
+					}],
+					"aoColumnDefs" : [
+										{
+											'aTargets' : [7],
+											'fnRender' : function(oObj, sVal) {
+												return "<span class=\"label label-success\">"+sVal+"</span>";
+											}
+										}
+					]
 
 				});
 			} else {

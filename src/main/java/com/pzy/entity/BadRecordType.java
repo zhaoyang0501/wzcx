@@ -10,46 +10,62 @@ import javax.persistence.Table;
 
 import org.apache.struts2.json.annotations.JSON;
 @Entity
-@Table(name = "t_category")
-public class Category {
+@Table(name = "t_badrecordtype")
+public class BadRecordType {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String code;
+
 	private String name;
 	
-	private String remark;
-	private Date createDate;
-	
-	private Double cash;
+	private Double  cash;
 	private Double score;
 	public Double getCash() {
 		return cash;
 	}
+
 	public void setCash(Double cash) {
 		this.cash = cash;
 	}
+
+	
+
 	public Double getScore() {
 		return score;
 	}
+
 	public void setScore(Double score) {
 		this.score = score;
 	}
+
+
+
+	private String remark;
+
+	private Date createDate;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getRemark() {
 		return remark;
 	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
@@ -57,14 +73,8 @@ public class Category {
 	public Date getCreateDate() {
 		return createDate;
 	}
+
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
 }

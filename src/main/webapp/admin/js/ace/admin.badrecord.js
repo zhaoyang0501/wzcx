@@ -56,15 +56,21 @@ jQuery.adminBadRecord = {
 					},{
 						"mDataProp" : "address"
 					}, {
-						"mDataProp" : "type"
+						"mDataProp" : "badRecordType.name"
+					}, {
+						"mDataProp" : "badRecordType.score"
+					}, {
+						"mDataProp" : "badRecordType.cash"
 					}, {
 						"mDataProp" : "createDate"
+					}, {
+						"mDataProp" : "state"
 					}, {
 						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [5],
+							'aTargets' : [8],
 							'fnRender' : function(oObj, sVal) {
 								return "<button class=\"btn2 btn-info\" onclick=\"$.adminBadRecord.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
 								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminBadRecord.deleteBadRecord("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
@@ -116,8 +122,9 @@ jQuery.adminBadRecord = {
 	    			data:{
 	    				"badRecord.car.id":$("#carid").val(),
 	    				"badRecord.address":$("#address").val(),
-	    				"badRecord.type":$("#type").val(),
+	    				"badRecord.badRecordType.id":$("#type").val(),
 	    				"badRecord.createDate":$("#createDate").val(),
+	    				"badRecord.state":$("#state").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
@@ -138,8 +145,9 @@ jQuery.adminBadRecord = {
 	    				"badRecord.id":$("#id").val(),
 	    				"badRecord.car.id":$("#carid").val(),
 	    				"badRecord.address":$("#address").val(),
-	    				"badRecord.type":$("#type").val(),
+	    				"badRecord.badRecordType.id":$("#type").val(),
 	    				"badRecord.createDate":$("#createDate").val(),
+	    				"badRecord.state":$("#state").val()
 	    			},
 	    			dataType : "json",
 	    			success : function(json) {
@@ -168,7 +176,8 @@ jQuery.adminBadRecord = {
     					$("#_modal").modal('show');
     					$("#carid").val(json.resultMap.object.car.id);
     					$("#address").val(json.resultMap.object.address);
-    					$("#type").val(json.resultMap.object.type);
+    					$("#state").val(json.resultMap.object.state);
+    					$("#type").val(json.resultMap.object.badRecordType.id);
     				}else{
     					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
     				}
