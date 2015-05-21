@@ -43,6 +43,17 @@ public class BadRecordAction extends PageAction {
 		this.getResultMap().put("sEcho", getSEcho());
 		return SUCCESS;
 	}
+	@Action(value = "licenselist", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
+	public String licenselist() {
+		int pageNumber = (int) (this.getIDisplayStart() / this.getIDisplayLength()) + 1;
+		int pageSize =  this.getIDisplayLength();
+		Page<BadRecord> list= badRecordService.findAll(pageNumber, pageSize,name);
+		this.getResultMap().put("aaData", list.getContent());
+		this.getResultMap().put("iTotalRecords", list.getTotalElements());
+		this.getResultMap().put("iTotalDisplayRecords", list.getTotalElements());
+		this.getResultMap().put("sEcho", getSEcho());
+		return SUCCESS;
+	}
 	public String getName() {
 		return name;
 	}

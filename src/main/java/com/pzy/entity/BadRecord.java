@@ -25,7 +25,20 @@ public class BadRecord {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private BadRecordType badRecordType;
 	private String state;
-	
+	private String license;
+	private Date cleanDate;
+	public String getLicense() {
+		return license;
+	}
+	public void setLicense(String license) {
+		this.license = license;
+	}
+	public Date getCleanDate() {
+		return cleanDate;
+	}
+	public void setCleanDate(Date cleanDate) {
+		this.cleanDate = cleanDate;
+	}
 	public BadRecordType getBadRecordType() {
 		return badRecordType;
 	}

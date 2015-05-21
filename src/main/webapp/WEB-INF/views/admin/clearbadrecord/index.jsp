@@ -4,23 +4,44 @@
 <html lang="ch">
 <%@ include file="../common/meta.jsp"%>
 <head>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/ace/admin.badrecord.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/falgun/bootbox.js"></script>
 <script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript">
+	function getBadRecord(){
+		$.ajax({
+			type : "get",
+			url : $.ace.getContextPath() + "/admin/badrecord/get?id="+$("#badrecordid").val(),
+			dataType : "json",
+			success : function(json) {
+				if(json.resultMap.state=='success'){
+					$("#carid").val(json.resultMap.object.car.id);
+					$("#address").val(json.resultMap.object.address);
+					$("#state").val(json.resultMap.object.state);
+					$("#type").val(json.resultMap.object.badRecordType.id);
+					$("#createDate").val(json.resultMap.object.createDate);
+				}else{
+					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+				}
+			}
+		});
+	}
+	function cleanBadRecord(){
+		$.ajax({
+			type : "get",
+			url : $.ace.getContextPath() + "/admin/badrecord/clean?id="+$("#badrecordid").val()+"&license="+$("#license").val(),
+			dataType : "json",
+			success : function(json) {
+				if(json.resultMap.state=='success'){
+					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
+				}else{
+					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+				}
+			}
+		});
+	}
 	$(document).ready(function(){
-		$(".date").datetimepicker({
-			language:  'zh-CN',
-	        weekStart: 1,
-	        todayBtn:  1,
-	        format:'yyyy-mm-dd',
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 0
-	    });
+		
 	});
 </script>
 </head>
@@ -47,8 +68,8 @@
 								  <div class="control-group">
 								    <label class="control-label" for="inputEmail">违章编号</label>
 								    <div class="controls">
-								      <input type="text" id="inputEmail" placeholder="">
-								       <button type="button" class="btn">查询</button>
+								      <input type="text" id="badrecordid" placeholder="">
+								       <button type="button" class="btn" onclick="getBadRecord()">查询</button>
 								    </div>
 								  </div>
 								  
@@ -79,12 +100,12 @@
 							<div class="control-group" id='control_projectStep'>
 								<label for="createDate" class="control-label">驾照号码：</label>
 								<div class="controls">
-										 <input id="createDate"  type="text"  >
+										 <input id="license"  type="text"  >
 								</div>
 							</div>
 								  <div class="control-group">
 								    <div class="controls">
-								      <button type="submit" class="btn">处理</button>
+								      <button type="button" class="btn" onclick="cleanBadRecord()">处理</button>
 								    </div>
 								  </div>
 								</form>

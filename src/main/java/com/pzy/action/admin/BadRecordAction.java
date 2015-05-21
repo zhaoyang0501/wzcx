@@ -1,5 +1,6 @@
 package com.pzy.action.admin;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -27,6 +28,7 @@ import com.pzy.service.LoadService;
 public class BadRecordAction extends PageAction {
 	private String name;
 	private Long id;
+	private String license;
 	private BadRecord badRecord;
 	private List<BadRecord> badRecords;
 	private  List<Car> cars;
@@ -82,6 +84,17 @@ public class BadRecordAction extends PageAction {
 		getResultMap().put("msg", "修改成功");
 		return SUCCESS;
 	}
+	@Action(value = "clean", results = { @Result(name = "success",  type = "json",params={"ignoreHierarchy","false"}) })  
+	public String clean() {
+		BadRecord bean = badRecordService.find(id);
+		bean.setLicense(license);
+		bean.setState("已经处理");
+		bean.setCleanDate(new Date());
+		badRecordService.save(bean);
+		getResultMap().put("state", "success");
+		getResultMap().put("msg", "处理成功！");
+		return SUCCESS;
+	}
 	@Action(value = "save", results = { @Result(name = "success",  type = "json",params={"ignoreHierarchy","false"}) })  
 	public String saveit() {
 		badRecordService.save(badRecord);
@@ -135,5 +148,12 @@ public class BadRecordAction extends PageAction {
 
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
+	}
+	public String getLicense() {
+		return license;
+	}
+
+	public void setLicense(String license) {
+		this.license = license;
 	}
 }

@@ -44,6 +44,22 @@ public class BadRecordService {
          Page<BadRecord> result = (Page<BadRecord>) badRecordRepository.findAll(spec, pageRequest);
          return result;
      	}
+     
+     public Page<BadRecord> findAll(final int pageNumber, final int pageSize,final String license){
+         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+        
+         Specification<BadRecord> spec = new Specification<BadRecord>() {
+              public Predicate toPredicate(Root<BadRecord> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+              Predicate predicate = cb.conjunction();
+              if (license != null) {
+                   predicate.getExpressions().add(cb.equal(root.get("license").as(String.class), license));
+              }
+              return predicate;
+              }
+         };
+         Page<BadRecord> result = (Page<BadRecord>) badRecordRepository.findAll(spec, pageRequest);
+         return result;
+     	}
 		public void delete(Long id){
 			badRecordRepository.delete(id);
 		}
