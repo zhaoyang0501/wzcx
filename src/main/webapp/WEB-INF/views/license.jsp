@@ -30,7 +30,7 @@
 									<a href="load">道路查询</a>
 								</li>
 								<li >
-									<a href="license">违章查询</a>
+									<a href="badrecord">违章查询</a>
 								</li>
 								<li class="active">
 									<a href="license">扣分查询</a>
