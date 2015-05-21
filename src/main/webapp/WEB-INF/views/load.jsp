@@ -32,6 +32,9 @@
 								<li >
 									<a href="badrecord">违章查询</a>
 								</li>
+								<li >
+									<a href="license">扣分查询</a>
+								</li>
 							</ul>
 						</div>
 					</div>

@@ -48,7 +48,7 @@ public class BadRecordAction extends PageAction {
 		int pageNumber = (int) (this.getIDisplayStart() / this.getIDisplayLength()) + 1;
 		int pageSize =  this.getIDisplayLength();
 		Page<BadRecord> list= badRecordService.findAll(pageNumber, pageSize,name);
-		this.getResultMap().put("aaData", list.getContent());
+		this.getResultMap().put("aaData", name==null?new ArrayList():list.getContent());
 		this.getResultMap().put("iTotalRecords", list.getTotalElements());
 		this.getResultMap().put("iTotalDisplayRecords", list.getTotalElements());
 		this.getResultMap().put("sEcho", getSEcho());
